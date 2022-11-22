@@ -5,7 +5,7 @@ Gem::Specification.new do |spec|
   spec.version     = MovinmotionApi::VERSION
   spec.authors     = ["Victor Holl"]
   spec.email       = ["v_h@me.com"]
-  spec.homepage    = "TODO"
+  spec.homepage    = "https://github.com/v-h-z/movinmotion_api"
   spec.summary     = "A simple Movinmotion API client."
   spec.description = "This gem allows you to access Movinmotion data for your account by adding your session cookie to the configuration. Movinmotion API is not publicly open and this Gem uses visible access points from their website. Please use carefully and respectfully."
   spec.license     = "MIT"
@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
   spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "TODO: Put your gem's public repo URL here."
+  spec.metadata["source_code_uri"] = "https://github.com/v-h-z/movinmotion_api"
   spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
 
   spec.files = Dir.chdir(File.expand_path(__dir__)) do
