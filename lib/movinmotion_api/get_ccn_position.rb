@@ -1,9 +1,10 @@
 class MovinmotionApi::GetCcnPosition
-  def initialize(position:)
+  def initialize(id:, idcc_number:)
+    # p position
     @path = '/reference/apigetccnposition'
     @payload = {
-      idccNumber: position.ccn.idcc_number,
-      positionId: position.movinmotion_id
+      idccNumber: idcc_number,
+      positionId: id
     }
   end
 

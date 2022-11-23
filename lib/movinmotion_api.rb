@@ -1,12 +1,13 @@
 require "movinmotion_api/version"
 require "movinmotion_api/railtie"
-require_relative "movinmotion_api/workers"
-require_relative "movinmotion_api/worker_info"
-require_relative "movinmotion_api/list_positions"
-require_relative "movinmotion_api/list_ccns"
-require_relative "movinmotion_api/get_ccn_position"
-require_relative "movinmotion_api/api_service"
-require_relative "movinmotion_api/configuration"
+require "movinmotion_api/workers"
+require "movinmotion_api/worker_info"
+require "movinmotion_api/list_positions"
+require "movinmotion_api/list_ccns"
+require "movinmotion_api/get_ccn_position"
+require "movinmotion_api/api_service"
+require "movinmotion_api/configuration"
+require "app/models/mm_job"
 
 module MovinmotionApi
   def self.configure
@@ -31,5 +32,9 @@ module MovinmotionApi
 
   def self.list_positions
     ListPositions.new.call
+  end
+
+  def self.get_ccn_position(id:, idcc_number:)
+    GetCcnPosition.new(id: id, idcc_number: idcc_number).call
   end
 end

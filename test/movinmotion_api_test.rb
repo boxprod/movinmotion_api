@@ -12,10 +12,32 @@ class MovinmotionApiTest < ActiveSupport::TestCase
   end
 
   test "it fetch public data without configuration" do
-    assert MovinmotionApi.list_ccns
+    MovinmotionApi::Configuration.reset
+    ccns = MovinmotionApi.list_ccns
+    assert ccns.success?
   end
 
   test "it doesnt fetch private data without configuration" do
+    MovinmotionApi::Configuration.reset
     assert_not MovinmotionApi.workers.success?
   end
+
+  test "it does fetch private data with configuration" do
+    MovinmotionApi.configure do |movinmotion|
+      cookie_file = File.join(Rails.root, 'storage', 'movinmotion_cookie.txt')
+      movinmotion.cookie = File.open(cookie_file).read.strip
+    end
+    worker_info = MovinmotionApi.worker_info(email: 'vh@box.paris')
+    assert worker_info.success?
+  end
+
+  test 'it fetch details on a specific position' do
+    MovinmotionApi.configure do |mm|
+      mm.use_classes = true
+    end
+    position = MmJob.where(idccNumbers: "2642").sample
+    details = MovinmotionApi.get_ccn_position(id: position.id, idcc_number: '2642')
+    assert details.success?
+  end
+
 end

@@ -11,10 +11,10 @@ class MovinmotionApi::WorkerInfo
     }
 
     response = MovinmotionApi::ApiService.new(verb: 'post', path: @path, payload: payload).call
-    if response.success? && response.data.dig('content', 'found')
-      OpenStruct.new(response.data.dig('content', 'infos'))
-    else
-      nil
-    end
+    # if response.success? && response.data.dig('content', 'found')
+    #   response = OpenStruct.new(response.data.dig('content', 'infos'))
+    # else
+    #   nil
+    # end
   end
 end
