@@ -18,7 +18,7 @@ class MmJob
   end
 
   def self.find(id)
-    @@mm_jobs.select{_1.id == id}
+    @@mm_jobs.select{_1.id == id}.first
   end
 
   def self.count
