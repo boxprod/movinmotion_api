@@ -13,6 +13,14 @@ class MmJob
     @@mm_jobs
   end
 
+  def self.first
+    @@mm_jobs.first
+  end
+
+  def self.find(id)
+    @@mm_jobs.select{_1.id == id}
+  end
+
   def self.count
     @@mm_jobs.count
   end
