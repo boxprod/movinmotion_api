@@ -27,8 +27,9 @@ class MmJobTest < ActiveSupport::TestCase
   end
 
   test 'it responds to #where' do
-    where = MmJob.where(idccNumbers: '2642')
+    p where = MmJob.where(idccNumbers: '2642')
     assert where
+    assert_not where.empty?
   end
 
   test 'it raises an error if wrong type in #where' do

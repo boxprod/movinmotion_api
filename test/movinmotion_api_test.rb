@@ -42,7 +42,7 @@ class MovinmotionApiTest < ActiveSupport::TestCase
     MovinmotionApi.configure do |mm|
       mm.use_classes = true
     end
-    position = MmJob.where(idccNumbers: "2642").sample
+    p position = MmJob.where(idccNumbers: '2642').sample
     details = MovinmotionApi.get_ccn_position(id: position.id, idcc_number: '2642')
     assert details.success?
   end

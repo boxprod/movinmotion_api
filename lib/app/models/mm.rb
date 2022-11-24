@@ -1,10 +1,11 @@
 class Mm
   def self.setup
     yaml = File.join(Rails.root, 'storage', "#{name.underscore}s.yml")
-    unless File.exist? yaml
+    unless File.exist?(yaml) || File.empty?(yaml)
       p 'api call!'
       File.open(yaml, 'w') do |file|
-        file.write(YAML.dump(yield))
+        data = YAML.dump(yield)
+        file.write(data) unless data.empty?
       end
     end
     @@all = YAML.safe_load(File.open(File.join(Rails.root, 'storage', "#{name.underscore}s.yml")).read).map{OpenStruct.new(_1)}
