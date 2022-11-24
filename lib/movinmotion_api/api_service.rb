@@ -13,6 +13,7 @@ class MovinmotionApi::ApiService
     https = Net::HTTP.new(@url.host, @url.port)
     https.use_ssl = true
 
+    p 'api call!'
     response = https.request(request)
     if response && response.is_a?(Net::HTTPOK)
       data = JSON.parse(response.read_body)

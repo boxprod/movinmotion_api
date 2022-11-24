@@ -3,11 +3,11 @@ class MovinmotionApi::Configuration
   attr_accessor :cookie
 
   def self.default
-    @@default ||= new
+    @default ||= new
   end
 
   def self.reset
-    @@default = nil
+    @default = nil
   end
 
   def use_classes=(boolean)

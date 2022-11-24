@@ -1,5 +1,5 @@
 MovinmotionApi.configure do |mm|
-      mm.cookie = ENV['MOVINMOTION_COOKIE']
-      mm.use_classes = true
-    end
-    
+  cookie_file = File.join(Rails.root, 'storage', 'movinmotion_cookie.txt')
+  mm.cookie = File.open(cookie_file).read.strip
+  mm.use_classes = true
+end

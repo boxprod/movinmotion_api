@@ -27,7 +27,7 @@ class MmJobTest < ActiveSupport::TestCase
   end
 
   test 'it responds to #where' do
-    p where = MmJob.where(idccNumbers: '2642')
+    where = MmJob.where(idccNumbers: '2642')
     assert where
     assert_not where.empty?
   end
@@ -41,5 +41,10 @@ class MmJobTest < ActiveSupport::TestCase
   test 'it responds to #categories' do
     categories = MmJob.categories
     assert categories
+  end
+
+  test 'it fetch details on an instance of a job' do
+    job = MmJob.all.sample
+    p job.ccns
   end
 end
