@@ -15,5 +15,6 @@ class MovinmotionApi::Configuration
 
     MmJob.setup { MovinmotionApi.list_positions.data.dig('content', 'positions') }
     MmCcn.setup { MovinmotionApi.list_ccns.data.dig('content', 'ccns') }
+    MmProject.setup { MovinmotionApi.list_projects.data.dig('content', 'projects') }
   end
 end

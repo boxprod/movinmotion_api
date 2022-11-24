@@ -4,12 +4,14 @@ require "movinmotion_api/workers"
 require "movinmotion_api/worker_info"
 require "movinmotion_api/list_positions"
 require "movinmotion_api/list_ccns"
+require "movinmotion_api/list_projects"
 require "movinmotion_api/get_ccn_position"
 require "movinmotion_api/api_service"
 require "movinmotion_api/configuration"
 require "app/models/mm"
 require "app/models/mm_job"
 require "app/models/mm_ccn"
+require "app/models/mm_project"
 
 module MovinmotionApi
   def self.configure
@@ -34,6 +36,10 @@ module MovinmotionApi
 
   def self.list_positions
     ListPositions.new.call
+  end
+
+  def self.list_projects
+    ListProjects.new.call
   end
 
   def self.get_ccn_position(id:, idcc_number:)
