@@ -37,8 +37,8 @@ class Mm
   def self.where(condition)
     message = condition.first.first
     value = condition.first.last
-    @all.select do |job|
-      column = job.send(message.to_s)
+    @all.select do |el|
+      column = el.send(message.to_s)
       next unless column
 
       if column.is_a?(Array)

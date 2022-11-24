@@ -13,7 +13,7 @@ class MovinmotionApi::Configuration
   def use_classes=(boolean)
     return unless boolean
 
-    MmJob.setup { MovinmotionApi.list_positions.data.dig('content', 'positions') }
+    MmPosition.setup { MovinmotionApi.list_positions.data.dig('content', 'positions') }
     MmCcn.setup { MovinmotionApi.list_ccns.data.dig('content', 'ccns') }
     MmProject.setup { MovinmotionApi.list_projects.data.dig('content', 'projects') }
   end

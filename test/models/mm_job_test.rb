@@ -6,46 +6,46 @@ class MmJobTest < ActiveSupport::TestCase
   end
 
   test 'it responds to #all' do
-    all = MmJob.all
+    all = MmPosition.all
     assert all
   end
 
   test 'it responds to #first' do
-    first = MmJob.first
+    first = MmPosition.first
     assert first
   end
 
   test 'it responds to #find' do
-    id = MmJob.all.sample.id
-    assert MmJob.find(id)
+    id = MmPosition.all.sample.id
+    assert MmPosition.find(id)
   end
 
   test 'it responds to #count' do
-    count = MmJob.count
+    count = MmPosition.count
     assert count
     assert count.instance_of? Integer
   end
 
   test 'it responds to #where' do
-    where = MmJob.where(idcc_numbers: '2642')
+    where = MmPosition.where(idcc_numbers: '2642')
     assert where
     assert_not where.empty?
   end
 
   test 'it raises an error if wrong type in #where' do
-    MmJob.where(idcc_numbers: 2642)
+    MmPosition.where(idcc_numbers: 2642)
   rescue StandardError => e
     assert e.message.include?('class')
   end
 
   test 'it responds to #categories' do
-    categories = MmJob.categories
+    categories = MmPosition.categories
     assert categories
   end
 
-  test 'it fetch details on an instance of a job' do
-    job = MmJob.all.sample
-    ccn = job.ccns.sample
-    p job.details(ccn: ccn)
+  test 'it fetch details on an instance of a position' do
+    p position = MmPosition.all.sample
+    ccn = position.ccns.sample
+    p position.ccn_details(ccn: ccn)
   end
 end

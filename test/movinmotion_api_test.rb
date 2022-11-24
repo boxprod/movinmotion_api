@@ -35,14 +35,14 @@ class MovinmotionApiTest < ActiveSupport::TestCase
     MovinmotionApi.configure do |mm|
       mm.use_classes = true
     end
-    assert MmJob.first
+    assert MmPosition.first
   end
 
   test 'it fetch details on a specific position' do
     MovinmotionApi.configure do |mm|
       mm.use_classes = true
     end
-    position = MmJob.where(idcc_numbers: '2642').sample
+    position = MmPosition.where(idcc_numbers: '2642').sample
     details = MovinmotionApi.get_ccn_position(id: position.id, idcc_number: '2642')
     assert details.success?
   end

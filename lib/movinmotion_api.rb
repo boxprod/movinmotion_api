@@ -9,7 +9,7 @@ require "movinmotion_api/get_ccn_position"
 require "movinmotion_api/api_service"
 require "movinmotion_api/configuration"
 require "app/models/mm"
-require "app/models/mm_job"
+require "app/models/mm_position"
 require "app/models/mm_ccn"
 require "app/models/mm_project"
 
