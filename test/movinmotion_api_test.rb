@@ -31,6 +31,13 @@ class MovinmotionApiTest < ActiveSupport::TestCase
     assert worker_info.success?
   end
 
+  test 'it allows the use of classes to manage movinmotion data' do
+    MovinmotionApi.configure do |mm|
+      mm.use_classes = true
+    end
+    assert MmJob.first
+  end
+
   test 'it fetch details on a specific position' do
     MovinmotionApi.configure do |mm|
       mm.use_classes = true
@@ -39,5 +46,4 @@ class MovinmotionApiTest < ActiveSupport::TestCase
     details = MovinmotionApi.get_ccn_position(id: position.id, idcc_number: '2642')
     assert details.success?
   end
-
 end

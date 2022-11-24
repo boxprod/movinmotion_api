@@ -7,7 +7,9 @@ require "movinmotion_api/list_ccns"
 require "movinmotion_api/get_ccn_position"
 require "movinmotion_api/api_service"
 require "movinmotion_api/configuration"
+require "app/models/mm"
 require "app/models/mm_job"
+require "app/models/mm_ccn"
 
 module MovinmotionApi
   def self.configure
