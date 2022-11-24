@@ -8,13 +8,14 @@ class Mm
 
   def self.setup
     yaml = File.join(Rails.root, 'storage', "#{name.underscore}s.yml")
-    unless File.exist?(yaml) || File.empty?(yaml)
+    unless File.exist?(yaml) && !File.open(yaml).read.empty?
       File.open(yaml, 'w') do |file|
         data = YAML.dump(yield)
         file.write(data) unless data.empty?
       end
     end
-    @all = YAML.safe_load(File.open(yaml).read).map{self.new(_1)}
+    yaml_serialized = File.open(yaml).read
+    @all = YAML.safe_load(yaml_serialized).map { new(_1) }
   end
 
   def self.all
