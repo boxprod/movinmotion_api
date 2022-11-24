@@ -5,7 +5,7 @@ class MmJob < Mm
 
   def details(ccn:)
     response = MovinmotionApi.get_ccn_position(id: id, idcc_number: ccn.idcc_number)
-    OpenStruct.new(response.dig('data', 'content', 'ccnPosition')) if response&.success?
+    OpenStruct.new(response.dig('data', 'content', 'ccnPosition').transform_keys(&:underscore)) if response&.success?
   end
 
   def ccns
