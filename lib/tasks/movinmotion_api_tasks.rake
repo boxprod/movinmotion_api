@@ -1,4 +1,6 @@
-# desc "Explaining what the task does"
-# task :movinmotion_api do
-#   # Task goes here
-# end
+namespace :movinmotion_api do
+  desc "Movinmotion API setup"
+  task :install do
+    rails generate mm_initializer
+  end
+end
