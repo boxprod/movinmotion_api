@@ -27,13 +27,13 @@ class MmJobTest < ActiveSupport::TestCase
   end
 
   test 'it responds to #where' do
-    where = MmJob.where(idccNumbers: '2642')
+    where = MmJob.where(idcc_numbers: '2642')
     assert where
     assert_not where.empty?
   end
 
   test 'it raises an error if wrong type in #where' do
-    MmJob.where(idccNumbers: 2642)
+    MmJob.where(idcc_numbers: 2642)
   rescue StandardError => e
     assert e.message.include?('class')
   end
@@ -45,6 +45,7 @@ class MmJobTest < ActiveSupport::TestCase
 
   test 'it fetch details on an instance of a job' do
     job = MmJob.all.sample
-    p job.ccns
+    ccn = job.ccns.sample
+    p job.details(ccn: ccn)
   end
 end

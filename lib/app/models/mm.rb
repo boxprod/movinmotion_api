@@ -1,4 +1,11 @@
 class Mm
+  def initialize(attributes)
+    attributes.each do |key, value|
+      instance_variable_set("@#{key.underscore}", value)
+      self.class.send(:attr_reader, key.underscore)
+    end
+  end
+
   def self.setup
     yaml = File.join(Rails.root, 'storage', "#{name.underscore}s.yml")
     unless File.exist?(yaml) || File.empty?(yaml)
@@ -7,7 +14,7 @@ class Mm
         file.write(data) unless data.empty?
       end
     end
-    @all = YAML.safe_load(File.open(File.join(Rails.root, 'storage', "#{name.underscore}s.yml")).read).map{OpenStruct.new(_1)}
+    @all = YAML.safe_load(File.open(yaml).read).map{self.new(_1)}
   end
 
   def self.all
@@ -43,5 +50,9 @@ class Mm
         column == value
       end
     end
+  end
+
+  def self.find_by(condition)
+    where(condition).first
   end
 end
