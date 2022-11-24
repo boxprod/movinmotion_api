@@ -1,6 +1,6 @@
 class MmJob
   def self.setup
-    jobs_yaml = File.join(Rails.root, 'storage', 'jobs.yml')
+    jobs_yaml = File.join(Rails.root, 'storage', 'mm_jobs.yml')
     unless File.exist? jobs_yaml
       File.open(jobs_yaml, 'w') do |file|
         file.write(YAML.dump(MovinmotionApi.list_positions.data.dig('content', 'positions')))
