@@ -44,8 +44,8 @@ class MmPositionTest < ActiveSupport::TestCase
   end
 
   test 'it fetch details on an instance of a position' do
-    position = MmPosition.all.sample
-    ccn = position.ccns.sample
+    ccn = MmCcn.all.sample
+    position = ccn.positions.sample
     assert position.ccn_details(ccn: ccn)
   end
 end

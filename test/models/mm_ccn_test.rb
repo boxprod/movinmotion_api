@@ -42,4 +42,14 @@ class MmCcnTest < ActiveSupport::TestCase
     positions = MmCcn.all.sample.positions
     assert positions.is_a? Array
   end
+
+  test 'it responds to #positions_by_crew' do
+    positions = MmCcn.all.sample.positions_by_crew
+    assert positions.is_a? Hash
+  end
+
+  test 'it responds to #positions_names_by_crew' do
+    positions = MmCcn.all.sample.positions_names_by_crew
+    assert positions.is_a? Hash
+  end
 end
