@@ -15,7 +15,7 @@ class MovinmotionApi::ApiService
 
     p 'api call!'
     response = https.request(request)
-    if response && response.is_a?(Net::HTTPOK)
+    if response.is_a?(Net::HTTPOK)
       data = JSON.parse(response.read_body)
       result = OpenStruct.new(success?: true, data: data)
     else

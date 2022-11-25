@@ -1,6 +1,6 @@
 class MovinmotionApi::Configuration
 
-  attr_accessor :cookie
+  attr_reader :cookie, :company_id
 
   def self.default
     @default ||= new
@@ -8,6 +8,11 @@ class MovinmotionApi::Configuration
 
   def self.reset
     @default = nil
+  end
+
+  def cookie=(cookie)
+    @cookie = cookie
+    @company_id = cookie.split('companyId=').last.split('&').first.to_i
   end
 
   def use_classes=(boolean)

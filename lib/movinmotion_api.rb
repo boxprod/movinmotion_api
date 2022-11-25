@@ -6,6 +6,8 @@ require "movinmotion_api/list_positions"
 require "movinmotion_api/list_ccns"
 require "movinmotion_api/list_projects"
 require "movinmotion_api/get_ccn_position"
+require "movinmotion_api/check_project_name"
+require "movinmotion_api/write_project"
 require "movinmotion_api/api_service"
 require "movinmotion_api/configuration"
 require "app/models/mm"
@@ -44,5 +46,13 @@ module MovinmotionApi
 
   def self.get_ccn_position(id:, idcc_number:)
     GetCcnPosition.new(id: id, idcc_number: idcc_number).call
+  end
+
+  def self.check_project_name(name:)
+    CheckProjectName.new(name: name).call
+  end
+
+  def self.write_project(name:, idcc_number:, type_code:)
+    WriteProject.new(name: name, idcc_number: idcc_number, type_code: type_code).call
   end
 end
