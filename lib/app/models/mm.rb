@@ -26,6 +26,10 @@ class Mm
     @all.first
   end
 
+  def self.last
+    @all.last
+  end
+
   def self.find(id)
     @all.select{_1.id == id}.first
   end
@@ -37,16 +41,18 @@ class Mm
   def self.where(condition)
     message = condition.first.first
     value = condition.first.last
+    raise StandardError, "No column '#{message}' for #{name}" unless first.respond_to?(message.to_s)
+
     @all.select do |el|
       column = el.send(message.to_s)
       next unless column
 
       if column.is_a?(Array)
-        raise StandardError, "Value should be of class #{column.first.class} for column #{message}" if column.first.class != value.class
+        # raise StandardError, "Value should be of class #{column.first.class} for column #{message}" if column.first.class != value.class
 
         column.include? value
       else
-        raise StandardError, "Value should be of class #{column.class} for column #{message}" if column.class != value.class
+        # raise StandardError, "Value should be of class #{column.class} for column #{message}" if column.class != value.class
 
         column == value
       end
