@@ -1,6 +1,6 @@
 require "test_helper"
 
-class MmJobTest < ActiveSupport::TestCase
+class MmPositionTest < ActiveSupport::TestCase
   MovinmotionApi.configure do |mm|
     mm.use_classes = true
   end
@@ -44,8 +44,8 @@ class MmJobTest < ActiveSupport::TestCase
   end
 
   test 'it fetch details on an instance of a position' do
-    p position = MmPosition.all.sample
+    position = MmPosition.all.sample
     ccn = position.ccns.sample
-    p position.ccn_details(ccn: ccn)
+    assert position.ccn_details(ccn: ccn)
   end
 end
