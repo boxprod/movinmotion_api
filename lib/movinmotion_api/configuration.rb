@@ -1,6 +1,7 @@
 class MovinmotionApi::Configuration
 
   attr_reader :cookie, :company_id
+  attr_accessor :write_access
 
   def self.default
     @default ||= new

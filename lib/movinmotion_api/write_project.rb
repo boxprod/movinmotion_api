@@ -8,8 +8,10 @@ class MovinmotionApi::WriteProject
   end
 
   def call
+    raise StandardError, 'No Write Access Defined' unless MovinmotionApi::Configuration.default.write_access
+
     payload = {
-      "companyId": @company_id,
+      "companyId": nil,
       "name": @name,
       "typeCode": @type_code,
       "idccNumber": @idcc_number
