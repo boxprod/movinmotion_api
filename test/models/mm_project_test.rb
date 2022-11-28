@@ -6,34 +6,34 @@ class MmProjectTest < ActiveSupport::TestCase
   end
 
   test 'it responds to #all' do
-    all = MmProject.all
+    all = Mm::Project.all
     assert all
   end
 
   test 'it responds to #first' do
-    first = MmProject.first
+    first = Mm::Project.first
     assert first
   end
 
   test 'it responds to #find' do
-    id = MmProject.all.sample.id
-    assert MmProject.find(id)
+    id = Mm::Project.all.sample.id
+    assert Mm::Project.find(id)
   end
 
   test 'it responds to #count' do
-    count = MmProject.count
+    count = Mm::Project.count
     assert count
     assert count.instance_of? Integer
   end
 
   test 'it responds to #where' do
-    where = MmProject.where(idcc_number: '2642')
+    where = Mm::Project.where(idcc_number: '2642')
     assert where
     assert_not where.empty?
   end
 
   test 'it raises an error if wrong type in #where' do
-    MmProject.where(idcc_number: 2642)
+    Mm::Project.where(idcc_number: 2642)
   rescue StandardError => e
     assert e.message.include?('class')
   end

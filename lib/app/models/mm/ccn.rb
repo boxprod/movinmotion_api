@@ -1,7 +1,7 @@
 module Mm
   class Ccn < OrmLookAlike
     def positions
-      MmPosition.where(idcc_numbers: idcc_number)
+      Position.where(idcc_numbers: idcc_number)
     end
 
     def positions_by_crew
