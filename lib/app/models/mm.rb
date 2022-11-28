@@ -1,65 +1,75 @@
-class Mm
-  def initialize(attributes)
-    attributes.each do |key, value|
-      instance_variable_set("@#{key.underscore}", value)
-      self.class.send(:attr_reader, key.underscore)
-    end
-  end
+module Mm
+  class OrmLookAlike
+    extend Enumerable
 
-  def self.setup
-    yaml = File.join(Rails.root, 'storage', "#{name.underscore}s.yml")
-    unless File.exist?(yaml) && !File.open(yaml).read.empty?
-      File.open(yaml, 'w') do |file|
-        data = YAML.dump(yield)
-        file.write(data) unless data.empty?
+    def initialize(attributes)
+      attributes.each do |key, value|
+        instance_variable_set("@#{key.underscore}", value)
+        self.class.send(:attr_reader, key.underscore)
       end
     end
-    yaml_serialized = File.open(yaml).read
-    @all = YAML.safe_load(yaml_serialized).map { new(_1) }
-  end
 
-  def self.all
-    @all
-  end
+    def self.setup
+      yaml = File.join(Rails.root, 'storage', "#{name.underscore}s.yml")
+      unless File.exist?(yaml) && !File.open(yaml).read.empty?
+        dir = File.join(Rails.root, 'storage', 'mm')
+        Dir.mkdir(dir) unless Dir.exist?(dir)
+        File.open(yaml, 'w') do |file|
+          data = YAML.dump(yield)
+          file.write(data) unless data.empty?
+        end
+      end
+      yaml_serialized = File.open(yaml).read
+      @all = YAML.safe_load(yaml_serialized).map { new(_1) }
+    end
 
-  def self.first
-    @all.first
-  end
+    def self.each
+      @all.each { yield _1 }
+    end
 
-  def self.last
-    @all.last
-  end
+    def self.all
+      @all
+    end
 
-  def self.find(id)
-    @all.select{_1.id == id}.first
-  end
+    def self.first
+      @all.first
+    end
 
-  def self.count
-    @all.count
-  end
+    def self.last
+      @all.last
+    end
 
-  def self.where(condition)
-    message = condition.first.first
-    value = condition.first.last
-    raise StandardError, "No column '#{message}' for #{name}" unless first.respond_to?(message.to_s)
+    def self.find(id)
+      @all.select{_1.id == id}.first
+    end
 
-    @all.select do |el|
-      column = el.send(message.to_s)
-      next unless column
+    def self.count
+      @all.count
+    end
 
-      if column.is_a?(Array)
-        # raise StandardError, "Value should be of class #{column.first.class} for column #{message}" if column.first.class != value.class
+    def self.where(condition)
+      message = condition.first.first
+      value = condition.first.last
+      raise StandardError, "No column '#{message}' for #{name}" unless first.respond_to?(message.to_s)
 
-        column.include? value
-      else
-        # raise StandardError, "Value should be of class #{column.class} for column #{message}" if column.class != value.class
+      @all.select do |el|
+        column = el.send(message.to_s)
+        next unless column
 
-        column == value
+        if column.is_a?(Array)
+          # raise StandardError, "Value should be of class #{column.first.class} for column #{message}" if column.first.class != value.class
+
+          column.include? value
+        else
+          # raise StandardError, "Value should be of class #{column.class} for column #{message}" if column.class != value.class
+
+          column == value
+        end
       end
     end
-  end
 
-  def self.find_by(condition)
-    where(condition).first
+    def self.find_by(condition)
+      where(condition).first
+    end
   end
 end

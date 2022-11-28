@@ -11,9 +11,12 @@ require "movinmotion_api/write_project"
 require "movinmotion_api/api_service"
 require "movinmotion_api/configuration"
 require "app/models/mm"
-require "app/models/mm_position"
-require "app/models/mm_ccn"
-require "app/models/mm_project"
+# Dir["/app/models/mm/*.rb"].each { |file| require file }
+# p Dir["app/models/mm/*"]
+Dir[File.join(__dir__, 'app/models/mm', '*.rb')].each { |file| require file }
+# require "app/models/mm_position"
+# require "app/models/mm_ccn"
+# require "app/models/mm_project"
 
 module MovinmotionApi
   def self.configure
