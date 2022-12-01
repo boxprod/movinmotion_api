@@ -18,7 +18,8 @@ If you keep the use of the classes, you have a few new ActiveRecord-like models:
 - Mm::Position
 - Mm::Project
 - Mm::Ccn
-(more to come)
+- (more to come)
+
 they respond to classic ActiveRecord messages. Please reach if you need more help on this.
 
 ## Installation
