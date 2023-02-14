@@ -52,4 +52,9 @@ class MmCcnTest < ActiveSupport::TestCase
     positions = Mm::Ccn.all.sample.positions_names_by_crew
     assert positions.is_a? Hash
   end
+
+  test 'it responds to #attributes' do
+    attributes = Mm::Ccn.first.attributes
+    assert attributes.is_a? Hash
+  end
 end

@@ -2,7 +2,10 @@ module Mm
   class OrmLookAlike
     extend Enumerable
 
+    attr_reader :attributes
+
     def initialize(attributes)
+      @attributes = attributes
       attributes.each do |key, value|
         instance_variable_set("@#{key.underscore}", value)
         self.class.send(:attr_reader, key.underscore)
